@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔥 AVII TOOL - WhatsApp Spammer 🔥</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>🔥 AVII TOOL 🔥</h1>
+    <p class="desc">Scan WhatsApp QR and send auto messages!</p>
+    <div class="qrbox">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=scan-later&size=200x200" alt="QR code will be shown here">
+    </div>
+    <form method="POST">
+        <textarea name="message" placeholder="Enter Message" required></textarea>
+        <textarea name="numbers" placeholder="Enter Numbers (comma or newline separated)" required></textarea>
+        <input type="number" name="delay" placeholder="Delay in seconds (optional)">
+        <input type="text" name="haters" placeholder="Targeted Names (optional)">
+        <button type="submit">🚀 Send</button>
+    </form>
+    <div class="status">{{ status }}</div>
+</body>
+</html>

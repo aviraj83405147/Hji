@@ -1,0 +1,46 @@
+body {
+    background-color: black;
+    color: #00ffea;
+    font-family: monospace;
+    text-align: center;
+}
+h1 {
+    font-size: 3em;
+    margin-top: 20px;
+    color: #00ffea;
+    text-shadow: 0 0 10px #0ff;
+}
+.desc {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+.qrbox img {
+    margin: 10px auto;
+    border: 3px solid #0ff;
+    border-radius: 10px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+}
+textarea, input {
+    margin: 10px;
+    padding: 10px;
+    background: #111;
+    border: 1px solid #00ffea;
+    color: #00ffea;
+}
+button {
+    padding: 10px;
+    background-color: #00ffea;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+.status {
+    margin-top: 20px;
+    color: yellow;
+}
