@@ -1,161 +1,186 @@
+DASHBOARD_HTML = '''
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>🔥 AVII TOOL - WhatsApp Spammer 🔥</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <style>
-        body {
-            background: black;
-            color: #0f0;
-            font-family: "Courier New", monospace;
-            font-size: 18px;
-            padding: 20px;
-            text-align: center;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVII DASHBOARD</title>
+<style>
+  body {
+    background: black;
+    color: #0f0;
+    font-family: "Courier New", monospace;
+    font-size: 18px;
+    padding: 20px;
+    text-align: center;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
 
-        h1 {
-            font-size: 3em;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00, 0 0 25px #0f0;
-        }
+  h1 {
+    font-size: 28px;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00, 0 0 25px #0f0;
+    margin-bottom: 25px;
+  }
 
-        .desc {
-            font-size: 1.2em;
-            color: #ff00ff;
-            text-shadow: 0 0 8px #ff00ff;
-        }
+  h2 {
+    font-size: 22px;
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  }
 
-        .qrbox img {
-            border: 3px solid #0ff;
-            border-radius: 15px;
-            margin: 20px auto;
-            box-shadow: 0 0 20px #0ff;
-        }
+  form, .script-block {
+    background: rgba(0, 0, 0, 0.85);
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow:
+      0 0 15px #00ffff,
+      0 0 25px #ff00ff,
+      0 0 35px #0f0;
+    max-width: 480px;
+    width: 90%;
+    position: relative;
+    z-index: 1;
+  }
 
-        form {
-            background: rgba(0, 0, 0, 0.8);
-            margin: 30px auto;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow:
-              0 0 15px #00ffff,
-              0 0 25px #ff00ff,
-              0 0 35px #0f0;
-            max-width: 480px;
-            width: 90%;
-        }
+  input, button {
+    background: black;
+    color: lime;
+    border: 2px solid lime;
+    padding: 12px;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow:
+      0 0 10px #0f0,
+      inset 0 0 10px #0f0;
+  }
 
-        textarea, input {
-            width: 100%;
-            margin: 10px 0;
-            padding: 12px;
-            font-size: 16px;
-            color: #00ffea;
-            background: black;
-            border: 2px solid #0f0;
-            border-radius: 8px;
-            box-shadow: inset 0 0 10px #0f0;
-        }
+  button:hover {
+    background: lime;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0 0 20px #0f0, inset 0 0 20px #0f0;
+  }
 
-        button {
-            background: #0f0;
-            color: black;
-            font-weight: bold;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 18px;
-            box-shadow: 0 0 15px #0f0, inset 0 0 10px #0f0;
-            cursor: pointer;
-        }
+  .logout-btn {
+    margin: 0 auto 30px auto;
+    max-width: 200px;
+  }
 
-        button:hover {
-            background: black;
-            color: lime;
-            box-shadow: 0 0 20px #0f0;
-        }
+  .script-block p {
+    font-size: 16px;
+    color: #0ff;
+    text-shadow: 0 0 8px #0ff;
+  }
 
-        .status {
-            margin-top: 15px;
-            color: yellow;
-            font-weight: bold;
-            text-shadow: 0 0 10px yellow;
-        }
+  hr {
+    border: none;
+    border-top: 1px solid #0f0;
+    margin: 20px 0;
+    opacity: 0.3;
+  }
 
-        .light {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #f0f 0%, transparent 70%);
-            animation: orbit 8s linear infinite;
-            opacity: 0.2;
-            z-index: 0;
-        }
+  /* Floating ambient light */
+  .light {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, #f0f 0%, transparent 70%);
+    animation: orbit 8s linear infinite;
+    opacity: 0.25;
+    z-index: 0;
+  }
 
-        @keyframes orbit {
-            0%   { transform: translate(0, 0); }
-            25%  { transform: translate(90vw, 0); }
-            50%  { transform: translate(90vw, 90vh); }
-            75%  { transform: translate(0, 90vh); }
-            100% { transform: translate(0, 0); }
-        }
+  @keyframes orbit {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(90vw, 0); }
+    50%  { transform: translate(90vw, 90vh); }
+    75%  { transform: translate(0, 90vh); }
+    100% { transform: translate(0, 0); }
+  }
 
-        .click-glow {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            pointer-events: none;
-            background: radial-gradient(circle, red, transparent 70%);
-            animation: clickFade 0.5s forwards;
-            z-index: 2;
-        }
+  .click-glow {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, red, transparent 70%);
+    animation: clickFade 0.5s forwards;
+    z-index: 2;
+  }
 
-        @keyframes clickFade {
-            0%   { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(3); }
-        }
+  @keyframes clickFade {
+    0%   { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(3); }
+  }
 
-        .click-text {
-            position: absolute;
-            font-size: 24px;
-            font-weight: bold;
-            color: #00ffff;
-            text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
-            animation: textFly 1s ease-out forwards;
-            z-index: 3;
-            pointer-events: none;
-        }
+  .click-text {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #00ffff;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+    animation: textFly 1s ease-out forwards;
+    z-index: 3;
+    pointer-events: none;
+  }
 
-        @keyframes textFly {
-            0%   { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-80px) scale(1.5); }
-        }
-    </style>
+  @keyframes textFly {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-80px) scale(1.5); }
+  }
+</style>
 </head>
 <body>
 
   <div class="light" id="light"></div>
 
-  <h1>🔥 AVII TOOL 🔥</h1>
-  <p class="desc">Scan WhatsApp QR and send auto messages!</p>
+  <h1>AVII DASHBOARD - Welcome {{ username }}</h1>
 
-  <div class="qrbox">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?data=scan-later&size=200x200" alt="QR code will be shown here">
-  </div>
-
-  <form method="POST">
-      <textarea name="message" placeholder="Enter Message" required></textarea>
-      <textarea name="numbers" placeholder="Enter Numbers (comma or newline separated)" required></textarea>
-      <input type="number" name="delay" placeholder="Delay in seconds (optional)">
-      <input type="text" name="haters" placeholder="Targeted Names (optional)">
-      <button type="submit">🚀 Send</button>
+  <form action="/logout" method="POST" class="logout-btn">
+    <button type="submit">Logout</button>
   </form>
 
-  <div class="status">{{ status }}</div>
+  <div class="script-block">
+    <h2>Start New Script</h2>
+    <form action="/start" method="POST" enctype="multipart/form-data">
+      <input type="text" name="convoId" placeholder="Convo ID" required><br>
+      <input type="text" name="hatersName" placeholder="Haters Name" required><br>
+      <input type="number" name="speed" placeholder="Speed (seconds)" required min="1"><br>
+      <label style="color:#ff0">Tokens File:
+        <input type="file" name="tokensFile" required>
+      </label><br><br>
+      <label style="color:#ff0">Messages File:
+        <input type="file" name="messagesFile" required>
+      </label><br><br>
+      <button type="submit">Start Script</button>
+    </form>
+  </div>
+
+  <div class="script-block">
+    <h2>Running Scripts</h2>
+    {% if running_scripts %}
+      {% for script in running_scripts %}
+        <p>Script ID: {{ script['id'] }}</p>
+        <form action="/stop" method="POST">
+          <input type="hidden" name="script_id" value="{{ script['id'] }}">
+          <button type="submit">Stop Script</button>
+        </form>
+        <hr>
+      {% endfor %}
+    {% else %}
+      <p>No running scripts.</p>
+    {% endif %}
+  </div>
 
   <script>
     const light = document.getElementById('light');
@@ -188,3 +213,4 @@
 
 </body>
 </html>
+'''
