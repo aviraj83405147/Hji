@@ -3,20 +3,188 @@
 <head>
     <title>🔥 AVII TOOL - WhatsApp Spammer 🔥</title>
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            background: black;
+            color: #0f0;
+            font-family: "Courier New", monospace;
+            font-size: 18px;
+            padding: 20px;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00, 0 0 25px #0f0;
+        }
+
+        .desc {
+            font-size: 1.2em;
+            color: #ff00ff;
+            text-shadow: 0 0 8px #ff00ff;
+        }
+
+        .qrbox img {
+            border: 3px solid #0ff;
+            border-radius: 15px;
+            margin: 20px auto;
+            box-shadow: 0 0 20px #0ff;
+        }
+
+        form {
+            background: rgba(0, 0, 0, 0.8);
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow:
+              0 0 15px #00ffff,
+              0 0 25px #ff00ff,
+              0 0 35px #0f0;
+            max-width: 480px;
+            width: 90%;
+        }
+
+        textarea, input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 16px;
+            color: #00ffea;
+            background: black;
+            border: 2px solid #0f0;
+            border-radius: 8px;
+            box-shadow: inset 0 0 10px #0f0;
+        }
+
+        button {
+            background: #0f0;
+            color: black;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 18px;
+            box-shadow: 0 0 15px #0f0, inset 0 0 10px #0f0;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: black;
+            color: lime;
+            box-shadow: 0 0 20px #0f0;
+        }
+
+        .status {
+            margin-top: 15px;
+            color: yellow;
+            font-weight: bold;
+            text-shadow: 0 0 10px yellow;
+        }
+
+        .light {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #f0f 0%, transparent 70%);
+            animation: orbit 8s linear infinite;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        @keyframes orbit {
+            0%   { transform: translate(0, 0); }
+            25%  { transform: translate(90vw, 0); }
+            50%  { transform: translate(90vw, 90vh); }
+            75%  { transform: translate(0, 90vh); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .click-glow {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, red, transparent 70%);
+            animation: clickFade 0.5s forwards;
+            z-index: 2;
+        }
+
+        @keyframes clickFade {
+            0%   { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(3); }
+        }
+
+        .click-text {
+            position: absolute;
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+            animation: textFly 1s ease-out forwards;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        @keyframes textFly {
+            0%   { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-80px) scale(1.5); }
+        }
+    </style>
 </head>
 <body>
-    <h1>🔥 AVII TOOL 🔥</h1>
-    <p class="desc">Scan WhatsApp QR and send auto messages!</p>
-    <div class="qrbox">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?data=scan-later&size=200x200" alt="QR code will be shown here">
-    </div>
-    <form method="POST">
-        <textarea name="message" placeholder="Enter Message" required></textarea>
-        <textarea name="numbers" placeholder="Enter Numbers (comma or newline separated)" required></textarea>
-        <input type="number" name="delay" placeholder="Delay in seconds (optional)">
-        <input type="text" name="haters" placeholder="Targeted Names (optional)">
-        <button type="submit">🚀 Send</button>
-    </form>
-    <div class="status">{{ status }}</div>
+
+  <div class="light" id="light"></div>
+
+  <h1>🔥 AVII TOOL 🔥</h1>
+  <p class="desc">Scan WhatsApp QR and send auto messages!</p>
+
+  <div class="qrbox">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=scan-later&size=200x200" alt="QR code will be shown here">
+  </div>
+
+  <form method="POST">
+      <textarea name="message" placeholder="Enter Message" required></textarea>
+      <textarea name="numbers" placeholder="Enter Numbers (comma or newline separated)" required></textarea>
+      <input type="number" name="delay" placeholder="Delay in seconds (optional)">
+      <input type="text" name="haters" placeholder="Targeted Names (optional)">
+      <button type="submit">🚀 Send</button>
+  </form>
+
+  <div class="status">{{ status }}</div>
+
+  <script>
+    const light = document.getElementById('light');
+    const colors = ["#f0f", "#f00", "#0ff", "#0f0", "#ff0", "#00f"];
+
+    document.addEventListener('mousemove', (e) => {
+      light.style.left = e.pageX - 30 + 'px';
+      light.style.top = e.pageY - 30 + 'px';
+    });
+
+    document.addEventListener('click', (e) => {
+      const glow = document.createElement('div');
+      glow.className = 'click-glow';
+      glow.style.left = (e.pageX - 50) + 'px';
+      glow.style.top = (e.pageY - 50) + 'px';
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      glow.style.background = `radial-gradient(circle, ${color}, transparent 70%)`;
+      document.body.appendChild(glow);
+      setTimeout(() => glow.remove(), 600);
+
+      const text = document.createElement('div');
+      text.className = 'click-text';
+      text.innerText = 'AVII OWNER';
+      text.style.left = (e.pageX - 40) + 'px';
+      text.style.top = (e.pageY - 20) + 'px';
+      document.body.appendChild(text);
+      setTimeout(() => text.remove(), 1000);
+    });
+  </script>
+
 </body>
 </html>
