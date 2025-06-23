@@ -6,10 +6,10 @@
 <body>
     <h2>Send Message</h2>
     <form method="post">
-        <textarea name="message" placeholder="Enter your message" required></textarea><br><br>
-        <input type="text" name="numbers" placeholder="Numbers (comma separated)" required><br><br>
-        <input type="number" name="delay" placeholder="Delay in seconds" required><br><br>
-        <input type="text" name="haters" placeholder="Optional: Haters"><br><br>
+        <textarea name="message" placeholder="Enter message here..." required></textarea><br><br>
+        <input type="text" name="numbers" placeholder="Numbers (comma-separated, no +)" required><br><br>
+        <input type="number" name="delay" placeholder="Delay (in seconds)" required><br><br>
+        <input type="text" name="haters" placeholder="Extra note (optional)"><br><br>
         <button type="submit">Send</button>
     </form>
     <p>{{ status }}</p>
