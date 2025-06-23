@@ -1,1 +1,14 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login via creds.json</title>
+</head>
+<body>
+    <h2>Upload WhatsApp creds.json</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="creds" accept=".json" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <p style="color:red;">{{ error }}</p>
+</body>
+</html>
