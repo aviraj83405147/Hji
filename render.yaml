@@ -1,9 +1,15 @@
-services:
-  - type: web
-    name: flask-whatsapp
-    runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
-    envVars:
-      - key: PORT
-        value: "10000"
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title></head>
+<body>
+    <h2>Dashboard</h2>
+    <form method="POST">
+        <input type="text" name="message" placeholder="Message"><br>
+        <input type="text" name="numbers" placeholder="Numbers (comma separated)"><br>
+        <input type="text" name="delay" placeholder="Delay"><br>
+        <input type="text" name="haters" placeholder="Haters"><br>
+        <button type="submit">Send</button>
+    </form>
+    <p>{{ status }}</p>
+</body>
+</html>
