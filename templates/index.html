@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Send WhatsApp Message</title>
-</head>
+<head><title>Dashboard</title></head>
 <body>
-    <h2>Send Message</h2>
-    <form method="post">
-        <textarea name="message" placeholder="Enter message here..." required></textarea><br><br>
-        <input type="text" name="numbers" placeholder="Numbers (comma-separated, no +)" required><br><br>
-        <input type="number" name="delay" placeholder="Delay (in seconds)" required><br><br>
-        <input type="text" name="haters" placeholder="Extra note (optional)"><br><br>
+    <h2>Dashboard</h2>
+    <form method="POST">
+        <input type="text" name="message" placeholder="Message"><br>
+        <input type="text" name="numbers" placeholder="Numbers (comma separated)"><br>
+        <input type="text" name="delay" placeholder="Delay"><br>
+        <input type="text" name="haters" placeholder="Haters"><br>
         <button type="submit">Send</button>
     </form>
     <p>{{ status }}</p>
-    <a href="/logout">Logout</a>
 </body>
 </html>
