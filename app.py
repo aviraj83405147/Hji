@@ -53,7 +53,7 @@ def dashboard():
             'creds_file': session['creds_file']
         }
         try:
-            res = requests.post('https://YOUR-BAILEYS-BACKEND.onrender.com/send', json=data)
+            res = requests.post('https://<tera-baileys-backend>.onrender.com/send', json=data)
             status = res.text
         except Exception as e:
             status = f"Error: {str(e)}"
