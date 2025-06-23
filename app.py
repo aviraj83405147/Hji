@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session, url_for
 from werkzeug.utils import secure_filename
 import os
 import json
+import requests
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
