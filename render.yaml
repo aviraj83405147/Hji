@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: baileys-backend
+    runtime: node
+    buildCommand: npm install
+    startCommand: node sender_backend.js
