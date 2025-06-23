@@ -1,6 +1,9 @@
 services:
   - type: web
-    name: baileys-backend
-    runtime: node
-    buildCommand: npm install
-    startCommand: node sender_backend.js
+    name: flask-whatsapp
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PORT
+        value: "10000"
