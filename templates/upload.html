@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Upload WhatsApp creds.json</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 40px;
-            background: #111;
-            color: white;
-        }
-        h2 {
-            color: #00ff99;
-        }
-        form {
-            margin-top: 20px;
-        }
-        input[type="file"] {
-            padding: 10px;
-            background: #222;
-            color: white;
-            border
+<head><title>Upload</title></head>
+<body>
+    <h2>Upload creds.json</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="creds" accept=".json" required>
+        <button type="submit">Upload</button>
+    </form>
+    {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+</body>
+</html>
