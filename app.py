@@ -5,15 +5,15 @@ import json
 import requests
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'
+app.secret_key = 'your_secret_key'
 
 UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = {'json'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = {'json'}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -23,24 +23,21 @@ def login():
     error = ''
     if request.method == 'POST':
         if 'creds' not in request.files:
-            error = 'No file part'
+            error = 'No file uploaded'
         file = request.files['creds']
         if file.filename == '':
-            error = 'No selected file'
+            error = 'No file selected'
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
-
-            # Optional: Try to parse JSON to ensure it's valid
             try:
                 with open(filepath, 'r') as f:
-                    creds_data = json.load(f)
+                    json.load(f)  # verify valid JSON
                 session['creds_file'] = filename
                 return redirect('/dashboard')
-            except Exception as e:
-                error = 'Invalid creds.json file.'
-
+            except:
+                error = 'Invalid JSON format in creds file.'
     return render_template('upload.html', error=error)
 
 @app.route('/dashboard', methods=['GET', 'POST'])
@@ -74,8 +71,8 @@ def dashboard():
 @app.route('/logout')
 def logout():
     session.pop('creds_file', None)
-    return redirect(url_for('login'))
-
+    return redirect('/')
+    
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
